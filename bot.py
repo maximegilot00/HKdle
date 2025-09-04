@@ -1,7 +1,9 @@
+from flask import Flask
+import threading
+import os
 import discord
 import requests
 import random
-import os
 
 # ========================
 # 🔑 CONFIG
@@ -9,8 +11,22 @@ import os
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 API_KEY = os.getenv("API_KEY")
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
+RANGE = os.getenv("RANGE")
 
-RANGE = "Hollowdle!B2:K48"  # adapte à la taille de ton tableau
+# ========================
+# 🌐 SERVER WEB (Render check)
+# ========================
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is running!"
+
+def run_web():
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
+threading.Thread(target=run_web).start()
 
 # ========================
 # 📊 CHARGEMENT DES DONNÉES
