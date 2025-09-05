@@ -116,6 +116,25 @@ async def on_message(message):
     #    return
 
     user_id = message.author.id
+    
+    # =====================
+    # Help
+    # =====================
+    if message.content.startswith("!help"):
+        embed = discord.Embed(
+            title="📖 HKdle Bot - Help",
+            description="List of available commands:",
+            color=discord.Color.purple()
+        )
+        embed.add_field(name="!start", value="Start a new game.", inline=False)
+        embed.add_field(name="!guess <name>", value="Guess a boss by name.", inline=False)
+        embed.add_field(name="!list", value="Show the full list of bosses.", inline=False)
+        embed.add_field(name="!ff", value="Forfeit the current game.", inline=False)
+        embed.add_field(name="!stats", value="Show your personal game statistics.", inline=False)
+        embed.add_field(name="!help", value="Show this help message.", inline=False)
+
+        await message.channel.send(embed=embed)
+
 
     # =====================
     # Start a new game
